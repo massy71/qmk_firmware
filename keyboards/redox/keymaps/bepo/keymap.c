@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_bepo.h"
+#include "sendstring_bepo.h"
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -23,6 +24,8 @@ enum custom_keycodes {
   NUM,
   SYM,
   FUN,
+  EMAILP,
+  EMAILW
 };
 
 #define KC_COPY LCTL(BP_C)
@@ -81,6 +84,25 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // - Tap dance:
 #define BP_TDCO TD(TD_COMM)          // ,, -> ;
 #define BP_TDDO TD(TD_DOT)           // .. -> :
+
+//Macros
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    case EMAILP:  // Types ../ to go up a directory on the shell.
+      if (record->event.pressed) {
+        SEND_STRING("massimo.casalini@gmail.com");
+      }
+      return false;
+
+    case EMAILW:  // Types triple equal ===
+      if (record->event.pressed) {
+        SEND_STRING("massimo.casalini@agedi.fr");
+      }
+      return false;
+  }
+  return true;
+}
 
 // Shortcut to make keymap more readable
 
@@ -256,9 +278,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,BP_LCBR ,BP_AMPR ,BP_ASTR ,BP_LPRN ,BP_RCBR ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,QK_BOOT ,_______ ,
+     EMAILP  ,BP_LCBR ,BP_AMPR ,BP_ASTR ,BP_LPRN ,BP_RCBR ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,QK_BOOT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,BP_COLN ,BP_DLR  ,BP_PERC ,BP_CIRC ,KC_PPLS ,_______ ,                          _______ ,_______ ,KC_RSFT ,KC_RCTL ,KC_RALT ,KC_RGUI ,_______ ,
+     EMAILW  ,BP_COLN ,BP_DLR  ,BP_PERC ,BP_CIRC ,KC_PPLS ,_______ ,                          _______ ,_______ ,KC_RSFT ,KC_RCTL ,KC_RALT ,KC_RGUI ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,BP_TILD ,BP_EXLM ,BP_AT   ,BP_HASH ,BP_PIPE ,_______ ,_______ ,        _______ ,_______ ,_______ ,BP_SYM  ,BP_MOUS ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
