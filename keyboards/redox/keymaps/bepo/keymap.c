@@ -134,28 +134,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 // RGB
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {1, 2, HSV_RED}
+    {6, 4, HSV_RED}
 );
 const rgblight_segment_t PROGMEM my_nav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_CYAN}
+    {0, 5, HSV_CYAN}
 );
 const rgblight_segment_t PROGMEM my_mouse_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_YELLOW}
+    {0, 5, HSV_YELLOW}
 );
 const rgblight_segment_t PROGMEM my_button_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_PINK}
+    {0, 5, HSV_PINK}
 );
 const rgblight_segment_t PROGMEM my_media_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_PURPLE}
+    {0, 5, HSV_PURPLE}
 );
 const rgblight_segment_t PROGMEM my_num_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_BLUE}
+    {0, 5, HSV_BLUE}
 );
 const rgblight_segment_t PROGMEM my_sym_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_GREEN}
+    {0, 5, HSV_GREEN}
 );
 const rgblight_segment_t PROGMEM my_fun_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 2, HSV_ORANGE}
+    {0, 5, HSV_ORANGE}
 );
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
