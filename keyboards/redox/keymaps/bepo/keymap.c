@@ -39,6 +39,11 @@ enum tap_dance{
   TD_DOT,  // . -> :
 };
 
+// AUDIO
+#ifdef AUDIO_ENABLE
+   float tone_email[][2] = SONG(TOS_HYMN_RISEN);
+#endif
+
 // Comma to semicolon
 void dance_comm_finished (qk_tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
@@ -98,6 +103,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case EMAILW:  // Types triple equal ===
       if (record->event.pressed) {
         SEND_STRING("massimo.casalini@agedi.fr");
+         #ifdef AUDIO_ENABLE
+            PLAY_SONG(tone_email);
+         #endif
       }
       return false;
   }
@@ -131,7 +139,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 #define BP_SYM TG(_SYM)
 #define BP_FUN TG(_FUN)
 
-
+ 
 // RGB
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 2, HSV_RED},
@@ -170,6 +178,7 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_sym_layer,
     my_fun_layer
 );
+
 void keyboard_post_init_user(void) {
     // Enable the LED layers
     rgblight_layers = my_rgb_layers;
