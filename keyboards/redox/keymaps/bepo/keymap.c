@@ -25,10 +25,7 @@ enum custom_keycodes {
   SYM,
   FUN,
   EMAILP,
-  EMAILW,
-  SOUND1,
-  SOUND2,
-  SOUND3
+  EMAILW
 };
 
 #define KC_COPY LCTL(BP_C)
@@ -41,13 +38,6 @@ enum tap_dance{
   TD_COMM, // , -> ;
   TD_DOT,  // . -> :
 };
-
-// AUDIO
-#ifdef AUDIO_ENABLE
-   float tone_1[][2] = SONG(CAMPANELLA);
-   float tone_2[][2] = SONG(FANTASIE_IMPROMPTU);
-   float tone_3[][2] = SONG(NOCTURNE_OP_9_NO_1);
-#endif
 
 // Comma to semicolon
 void dance_comm_finished (qk_tap_dance_state_t *state, void *user_data) {
@@ -99,35 +89,18 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case EMAILP:  // Types ../ to go up a directory on the shell.
+    case EMAILP:
       if (record->event.pressed) {
         SEND_STRING("massimo.casalini@gmail.com");
       }
       return false;
 
-    case EMAILW:  // Types triple equal ===
+    case EMAILW:
       if (record->event.pressed) {
         SEND_STRING("massimo.casalini@agedi.fr");
       }
-    case SOUND1:  // Types triple equal ===
-      if (record->event.pressed) {
-         #ifdef AUDIO_ENABLE
-            PLAY_SONG(tone_1);
-         #endif
-      }
-    case SOUND2:  // Types triple equal ===
-      if (record->event.pressed) {
-         #ifdef AUDIO_ENABLE
-            PLAY_SONG(tone_2);
-         #endif
-      }
-    case SOUND3:  // Types triple equal ===
-      if (record->event.pressed) {
-         #ifdef AUDIO_ENABLE
-            PLAY_SONG(tone_3);
-         #endif
-      }
       return false;
+
   }
   return true;
 }
@@ -239,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,KC_AGIN ,KC_PSTE , KC_COPY, KC_CUT ,KC_UNDO ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,KC_UNDO ,KC_PSTE , KC_COPY, KC_CUT ,KC_AGIN ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_LGUI ,KC_LALT ,KC_LCTL ,KC_LSFT ,_______ ,_______ ,                          _______ ,KC_CAPS ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -279,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_MEDIA] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,SOUND1  ,SOUND2  ,SOUND3  ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,QK_BOOT ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,RGB_TOG ,RGB_MOD ,RGB_HUI ,RGB_SAI ,RGB_VAI ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
