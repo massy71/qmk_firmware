@@ -25,7 +25,10 @@ enum custom_keycodes {
   SYM,
   FUN,
   EMAILP,
-  EMAILW
+  EMAILW,
+  PLY_IMPR,
+  PLY_VIC,
+  PLY_TBG
 };
 
 #define KC_COPY LCTL(BP_C)
@@ -85,6 +88,41 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define BP_TDCO TD(TD_COMM)          // ,, -> ;
 #define BP_TDDO TD(TD_DOT)           // .. -> :
 
+// Audio
+#define IMPERIAL_MARCH \
+   HD_NOTE(_A4), HD_NOTE(_A4), HD_NOTE(_A4), QD_NOTE(_F4), QD_NOTE(_C5), \
+   HD_NOTE(_A4), QD_NOTE(_F4),  QD_NOTE(_C5), WD_NOTE(_A4), \
+   HD_NOTE(_E5), HD_NOTE(_E5), HD_NOTE(_E5), QD_NOTE(_F5), QD_NOTE(_C5), \
+   HD_NOTE(_A4), QD_NOTE(_F4),  QD_NOTE(_C5), WD_NOTE(_A4)
+
+#define TO_BOLDLY_GO \
+   W__NOTE(_BF3 ), \
+   Q__NOTE(_EF4 ), \
+   WD_NOTE(_AF4 ), \
+   W__NOTE(_REST), \
+   H__NOTE(_G4  ), \
+   Q__NOTE(_EF4 ), \
+   H__NOTE(_C4  ), \
+   W__NOTE(_REST), \
+   QD_NOTE(_F4  ), \
+   M__NOTE(_BF4, 128)
+
+#define VICTORY_FANFARE_SHORT \
+    ED_NOTE(_C6), \
+    ED_NOTE(_C6), \
+    ED_NOTE(_C6), \
+    ED_NOTE(_C6), \
+    W__NOTE(_REST), \
+    QD_NOTE(_GS5), \
+    QD_NOTE(_AS5), \
+    Q__NOTE(_C6), \
+    Q__NOTE(_AS5), \
+    Q__NOTE(_C6)
+
+float music_impr[][2] = SONG(IMPERIAL_MARCH);
+float music_tbg[][2] = SONG(TO_BOLDLY_GO);
+float music_vic[][2] = SONG(VICTORY_FANFARE_SHORT);
+
 //Macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -98,6 +136,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case EMAILW:
       if (record->event.pressed) {
         SEND_STRING("massimo.casalini@agedi.fr");
+      }
+      return false;
+
+   case PLY_IMPR:
+      if (record->event.pressed) {
+         PLAY_SONG(music_impr);
+      }
+      return false;
+   case PLY_VIC:
+      if (record->event.pressed) {
+         PLAY_SONG(music_vic);
+      }
+      return false;
+   case PLY_TBG:
+      if (record->event.pressed) {
+         PLAY_SONG(music_tbg);
       }
       return false;
 
@@ -252,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_MEDIA] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,PLY_TBG ,PLY_VIC ,PLY_IMPR,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,QK_BOOT ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,RGB_TOG ,RGB_MOD ,RGB_HUI ,RGB_SAI ,RGB_VAI ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤

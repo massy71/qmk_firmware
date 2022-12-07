@@ -165,9 +165,9 @@
 #ifndef IN_LIKE_FLINT
 #    define IN_LIKE_FLINT
 #endif
-#ifndef IMPERIAL_MARCH
-#    define IMPERIAL_MARCH
-#endif
+//#ifndef IMPERIAL_MARCH
+//#    define IMPERIAL_MARCH
+//#endif
 #ifndef BASKET_CASE
 #    define BASKET_CASE
 #endif
@@ -213,9 +213,9 @@
 #ifndef OLD_SPICE
 #    define OLD_SPICE
 #endif
-#ifndef VICTORY_FANFARE_SHORT
-#    define VICTORY_FANFARE_SHORT
-#endif
+//#ifndef VICTORY_FANFARE_SHORT
+//#    define VICTORY_FANFARE_SHORT
+//#endif
 #ifndef ALL_STAR
 #    define ALL_STAR
 #endif
@@ -225,9 +225,9 @@
 #ifndef FF_PRELUDE
 #    define FF_PRELUDE
 #endif
-#ifndef TO_BOLDLY_GO
-#    define TO_BOLDLY_GO
-#endif
+//#ifndef TO_BOLDLY_GO
+//#    define TO_BOLDLY_GO
+//#endif
 #ifndef KATAWARE_DOKI
 #    define KATAWARE_DOKI
 #endif
