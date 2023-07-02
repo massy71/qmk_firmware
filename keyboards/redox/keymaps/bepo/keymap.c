@@ -43,7 +43,7 @@ enum tap_dance{
 };
 
 // Comma to semicolon
-void dance_comm_finished (qk_tap_dance_state_t *state, void *user_data) {
+void dance_comm_finished (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
     register_code (BP_COMM);
   } else {
@@ -51,7 +51,7 @@ void dance_comm_finished (qk_tap_dance_state_t *state, void *user_data) {
     register_code (BP_COMM);
   }
 }
-void dance_comm_reset (qk_tap_dance_state_t *state, void *user_data) {
+void dance_comm_reset (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
     unregister_code (BP_COMM);
   } else {
@@ -61,7 +61,7 @@ void dance_comm_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 // Dot to colon
-void dance_dot_finished (qk_tap_dance_state_t *state, void *user_data) {
+void dance_dot_finished (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
     register_code (BP_DOT);
   } else {
@@ -69,7 +69,7 @@ void dance_dot_finished (qk_tap_dance_state_t *state, void *user_data) {
     register_code (BP_DOT);
   }
 }
-void dance_dot_reset (qk_tap_dance_state_t *state, void *user_data) {
+void dance_dot_reset (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
     unregister_code (BP_DOT);
   } else {
@@ -79,7 +79,7 @@ void dance_dot_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_COMM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_comm_finished, dance_comm_reset),
   [TD_DOT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_dot_finished, dance_dot_reset)
 };
